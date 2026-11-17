@@ -5,7 +5,7 @@ export interface SseFrame {
 }
 
 /** Serialises a typed message as an SSE frame whose event name is the message `type`. */
-export function encodeSse(message: { readonly type: string }): string {
+export function encodeSse<T extends { readonly type: string }>(message: T): string {
   return `event: ${message.type}\ndata: ${JSON.stringify(message)}\n\n`;
 }
 

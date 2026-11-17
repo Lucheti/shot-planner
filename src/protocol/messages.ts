@@ -33,22 +33,37 @@ export interface AppInfo {
   readonly model: string | null;
 }
 
-export const chatRequestSchema = z.object({
+export interface ChatMessage {
+  readonly role: 'user' | 'assistant';
+  readonly content: string;
+}
+
+/** The body of `POST /api/chat`: the transcript so far and the board the user is looking at. */
+export interface ChatRequest {
+  readonly messages: readonly ChatMessage[];
+  readonly board: Storyboard;
+}
+
+/** The body of `POST /api/generate`. */
+export interface GenerateRequest {
+  readonly board: Storyboard;
+  readonly shotId: string;
+  readonly mode: GenerationMode;
+}
+
+export const chatRequestSchema: z.ZodType<ChatRequest> = z.object({
   messages: z
     .array(z.object({ role: z.enum(['user', 'assistant']), content: z.string() }))
     .min(1)
     .refine((messages) => messages[messages.length - 1]?.role === 'user', 'The last message must be from the user.'),
   board: storyboardSchema,
 });
-export type ChatRequest = z.infer<typeof chatRequestSchema>;
-export type ChatMessage = ChatRequest['messages'][number];
 
-export const generateRequestSchema = z.object({
+export const generateRequestSchema: z.ZodType<GenerateRequest> = z.object({
   board: storyboardSchema,
   shotId: z.string().min(1),
   mode: generationModeSchema,
 });
-export type GenerateRequest = z.infer<typeof generateRequestSchema>;
 
 const generationStateSchema = storyboardSchema.shape.shots.element.shape.generation;
 const clipSchema = z.object({ url: z.string(), mimeType: z.string() });

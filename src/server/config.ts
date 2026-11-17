@@ -31,7 +31,7 @@ const envSchema = z.object({
   RUNWAYML_API_SECRET: optionalString,
   RUNWAY_VIDEO_MODEL: z.preprocess(blankAsUndefined, z.enum(RUNWAY_VIDEO_MODELS).default('gen4.5')),
   AGENT_MAX_STEPS: positiveInt(8),
-  AGENT_MAX_OUTPUT_TOKENS: positiveInt(4096),
+  AGENT_MAX_OUTPUT_TOKENS: positiveInt(8192),
   AGENT_CONTEXT_BUDGET_TOKENS: positiveInt(24_000),
   PORT: positiveInt(8787),
   WEB_DIST_DIR: z.preprocess(blankAsUndefined, z.string().default('dist/web')),
