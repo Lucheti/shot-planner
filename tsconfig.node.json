@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "src/domain",
+    "src/protocol",
+    "src/agent",
+    "src/providers",
+    "src/generation",
+    "src/server",
+    "tsup.config.ts",
+    "vitest.config.ts"
+  ]
+}

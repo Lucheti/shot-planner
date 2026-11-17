@@ -1,0 +1,57 @@
+{
+  "name": "shot-planner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A chat agent that turns a creative brief into a storyboard and generates each shot with image and video APIs.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.1.0",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c orange,gray \"pnpm dev:server\" \"pnpm dev:web\"",
+    "dev:server": "tsx watch --env-file-if-exists=.env src/server/main.ts",
+    "dev:web": "vite",
+    "start": "node --env-file-if-exists=.env dist/server/main.js",
+    "typecheck": "tsc -p tsconfig.node.json --noEmit && tsc -p tsconfig.web.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "build": "tsup && vite build",
+    "gate": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.9.0",
+    "@hono/node-server": "^2.1.9",
+    "@runwayml/sdk": "^4.28.0",
+    "geist": "^1.9.2",
+    "hono": "^4.13.19",
+    "motion": "^14.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "concurrently": "^10.0.7",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "jsdom": "^31.0.1",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.73.0",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}
