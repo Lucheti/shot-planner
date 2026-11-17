@@ -2,8 +2,7 @@
 
 A chat agent that turns a creative brief into a storyboard, then renders each shot through image and video generation APIs using tool calls. Claude plans and edits the shot list through typed tools; Runway generates the keyframes and clips; it all runs with zero keys in a demo mode.
 
-<!-- Replace with a real capture: docs/screenshot.png -->
-> **Screenshot placeholder.** Chat on the left (streamed replies and inline actions such as "Updated shot 2: framing → close-up"), animated storyboard cards on the right.
+![shot-planner in demo mode: the chat on the left edits the storyboard on the right through tool calls](docs/screenshot.png)
 
 ## How the agent works
 
